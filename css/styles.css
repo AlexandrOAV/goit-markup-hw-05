@@ -24,7 +24,7 @@
 --gradien-hero:linear-gradient(rgba(46, 47, 66, 0.7),
     rgba(46, 47, 66, 0.7));
 --costumers-border:#8E8F99;
-
+--time-transition: 1s cubic-bezier(0.4, 0, 0.2, 1);
 
 }
 
@@ -123,17 +123,21 @@ font-weight: 500;
 line-height: 1.5;
 letter-spacing: 0.02em;
 color: var(--nav-menu-color);
+transition:color var(--time-transition);
 }
 .menu-link:hover, 
-.menu-link:focus {
+.menu-link:focus,
+.menu-link.current {
   color:var(--nav-menu-active-color);
 }
+
 /* heder address  */
 
 .contact-list {
   display: flex;
   gap: 40px;
-}
+ }
+
 
 .contact-link {
   display: block;
@@ -143,6 +147,8 @@ color: var(--nav-menu-color);
   line-height: 1.5;
   letter-spacing: 0.02em;  
   color:var(--hover-address-color);
+  transition: color var(--time-transition);
+
 }
 
 .contact-link:hover,
@@ -190,6 +196,7 @@ color: var(--nav-menu-color);
   color:var(--button-color);
   background-color: var(--button-background);
   cursor: pointer;
+  transition:background-color var(--time-transition);
 
 }
 .hero-btn:hover, 
@@ -317,6 +324,7 @@ color: var(--nav-menu-color);
   height: 100%;
   border-radius: 50%;
   background-color: var(--button-background);
+  transition: background-color var(--time-transition);
 }
 .social-link:hover, .social-link:focus {
   background-color: var(--button-portfolio-activ);
@@ -348,6 +356,8 @@ color: var(--nav-menu-color);
   border: 1px solid var(--costumers-border);
   border-radius: 4px;
   color: var(--costumers-border);
+  transition: color var(--time-transition),
+              border-color var(--time-transition);
   
 }
 .customers-icon {
@@ -415,6 +425,7 @@ margin-right: 0;
   height: 100%;
   border-radius: 50%;
   background-color:rgba(255, 255, 255, 0.1);
+  transition: background-color var(--time-transition);
 }
 
 .last-social-link:hover,
