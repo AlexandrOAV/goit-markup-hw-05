@@ -24,7 +24,8 @@
 --gradien-hero:linear-gradient(rgba(46, 47, 66, 0.7),
     rgba(46, 47, 66, 0.7));
 --costumers-border:#8E8F99;
---time-transition: 1s cubic-bezier(0.4, 0, 0.2, 1);
+--modal-backgraund-color: #FCFCFC;
+--time-transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
 }
 
@@ -81,7 +82,10 @@ background-color: var(--background-site);
 /* -----------------hedader----------------- */
 .header-page {
   border-bottom: 1px solid var(--color-border-cart-portfolio);
- }
+  box-shadow: 0px 2px 1px rgba(46, 47, 66, 0.08), 
+              0px 1px 1px rgba(46, 47, 66, 0.16),
+              0px 1px 6px rgba(46, 47, 66, 0.08);
+  }
 
 .header-nav{
   display: flex;
@@ -99,8 +103,7 @@ background-color: var(--background-site);
   }
 .header-nav .link {
   display: block;
-  padding-top: 24px;
-  padding-bottom: 24px;
+ 
 }
 
 .link-logo {
@@ -119,17 +122,34 @@ background-color: var(--background-site);
 }
 
 .menu-link {
+padding-top: 24px;
+padding-bottom: 24px;
+position: relative;
 font-weight: 500;
 line-height: 1.5;
 letter-spacing: 0.02em;
 color: var(--nav-menu-color);
 transition:color var(--time-transition);
+
 }
+
 .menu-link:hover, 
 .menu-link:focus,
 .menu-link.current {
   color:var(--nav-menu-active-color);
 }
+.menu-link.current::after
+ {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--active-address-color);
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+ }
 
 /* heder address  */
 
@@ -428,8 +448,7 @@ margin-right: 0;
   transition: background-color var(--time-transition);
 }
 
-.last-social-link:hover,
-.last-social-link:focus {
+.last-social-link:is(:hover, :focus) {
   background-color: #31D0AA;
 }
 
@@ -456,6 +475,8 @@ padding-bottom: 120px;
   color: var(--text-button-portfolio);
   background-color:var(--background-radio-button);
   cursor: pointer;
+  transition: background-color var(--time-transition), 
+              box-shadow var(--time-transition) ;
    }
 
  .radio-filter:hover, .radio-filter:focus {
@@ -472,10 +493,13 @@ padding-bottom: 120px;
   flex-wrap: wrap;
   column-gap: 24px;
   row-gap: 48px;
+  
 }
 .link-work-list {
   display: block;
-  box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08);
+  box-shadow: 0px 1px 6px
+             rgba(46, 47, 66, 0.08);
+  transition: box-shadow var(--time-transition);
 }
  
 .work-item {
@@ -504,12 +528,105 @@ padding-bottom: 120px;
     border-bottom: 1px solid var(--color-border-cart-portfolio);
     padding: 32px 0 32px 16px;
   }
+    .work-overley {
+  position: relative;
+  overflow: hidden;
+      }
+
+.text-work-overlay {
+position: absolute;
+top:0;
+overflow-y: auto;
+padding-top:40px;
+padding-left: 32px;
+padding-right: 32px;
+height: 100%;
+ font-weight: 400;
+ font-size: 16px;
+ line-height: 1.5;
+ letter-spacing: 0.02em;
+ color: var(--background-radio-button);
+ background-color: var(--text-button-portfolio);
+transform: translateY(100%);
+transition: transform var(--time-transition);
+}
+.link-work-list:is(:hover, :focus) .text-work-overlay{
+transform:translateY(0);
+}
+/* < !---------------------- Modal Window ------------------------------> */
+
+.backdrop {
+  position: fixed;
+  top:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+              visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 
+.modal-window-one{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 408px;
+  min-height: 576px;
+  padding: 24px;
+  background-color: var(--modal-backgraund-color);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 
+              0px 1px 3px rgba(0, 0, 0, 0.12),
+              0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .backdrop.is-hidden .modal-window-one {
+    transform: translate(-50%, -200%) scale(0);
+    
+  }
+
+.close-button {
+  display: flex;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+  padding: 0;
+  align-items: center;
+  background-color:var(--color-border-cart-portfolio);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  transition:background-color var(--time-transition);
+}
+.close-button:is(:hover, :focus) {
+  background-color:var(--button-hover-background);
+}
+
+.is-hidden{
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
 
 
-
-
+/* @keyframes modal {
+  0% {
+    transform: scale(0);
+     }
+  
+    95%{
+    transform: scale(1.1);
+  }
+  100%{
+    transform: scale(1);
+  }
+} */
+    /* animation-name: modal;
+    animation-duration: 5s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    animation-iteration-count:1;
+    animation-direction: normal; */
 
 
   /* Сітка універсальна  */
